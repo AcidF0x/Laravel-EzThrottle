@@ -63,13 +63,13 @@ trait EzThrottle
 
         $timeLeft = $this->leftUnblockTime();
         if ($timeLeft->days > 0) {
-            return trans('ezthrottle::error.days', ['day' => $timeLeft->days]);
+            return trans_choice('ezthrottle::error.days', ['day' => $timeLeft->days]);
         } elseif ($timeLeft->h > 0) {
-            return trans('ezthrottle::error.hour', ['hour' => $timeLeft->h]);
+            return trans_choice('ezthrottle::error.hour', ['hour' => $timeLeft->h]);
         } elseif ($timeLeft->i > 0) {
-            return trans('ezthrottle::error.min', ['min' => $timeLeft->i]);
+            return trans_choice('ezthrottle::error.min', ['min' => $timeLeft->i]);
         } elseif ($timeLeft->s > 0) {
-            return trans('ezthrottle::error.sec', ['sec' => $timeLeft->s]);
+            return trans_choice('ezthrottle::error.sec', ['sec' => $timeLeft->s]);
         }
     }
 
