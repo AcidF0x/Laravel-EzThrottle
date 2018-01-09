@@ -1,41 +1,68 @@
 # Laravel-EzThrottle
 A simple Laravel Throttle extension
 
-<<<<<<< Updated upstream
-##Todos
-
-=======
 
 Installation
 ------------
-I'll add..
+
 
 Basic Usage
 -----------
 
-Start by creating an `Throttle` instance 
+Start by creating an `Throttle` instance  
 
 ```php
-use AcidF0x\EzThrottle\Throttle;
+use AcidF0x\EzThrottle\Throttle;  
 
-$agent = new Agent($throttleKey, $maxAttempts //optional, $decayMinutes//optional);
+$throttle = new Throttle($throttleKey, $maxAttempts //optional, $decayMinutes //optional);  
 
 // increase hit count
-$agent->hit()
+$throttle->hit()
 
 if ($agent->isBlock()) {
-    echo $agent->getErrorMsg();
-    //
+    echo $throttle->getErrorMsg(); // "Too Many Requests. Please try again in 1 minutes"
+} else {
+    //do something..
 }
-
 ```
-or use the `EzThrottle` Trait if you want:
+or use the `EzThrottle` Trait if you want  
+
+```php
+use AcidF0x\EzThrottle\Foundation\EzThrottle;
+
+class SomeController extends Controller
+{
+    use EzThrottle;
+    
+    $protected $ThrottleKey = 'LoginThrottle';
+    $protected $maxAttempts = '3';
+    $protected $$decayMinutes = '1';
+    
+    public function doLogin()
+    {
+        //.....
+        
+        // increase hit count
+        $this->hit()
+        if ($this->isBlock()) {
+            return $this->getErrorMsg(); // "Too Many Requests. Please try again in 1 minutes"
+        } 
+        
+        //......
+    }
+}
+```
+
+Localization
+-----------
+
+Config
+-----------
 
 
 ## Todos
->>>>>>> Stashed changes
 - [x] Add Unit Test
 - [ ] Add Source Comment 
-- [ ] Add Useage on Readme File
+- [ ] Add Useage on Readme File (30%)
 - [ ] Add Packge on packagist
-- [ ] Test on Variable Laravel Version
+- [ ] Test on Variable Laravel Version (5.5 OK)
