@@ -32,6 +32,7 @@ class EzThrottleServiceProvider extends ServiceProvider
         
         $this->publishes([
             __DIR__.'/Lang' => resource_path('lang/vendor/ezthrottle'),
+            __DIR__.'/Config/ezthrottle.php' =>  config_path('ezthrottle.php')
         ]);
     }
 }

@@ -14,11 +14,11 @@ class Throttle
 
     protected $decayMinutes;
 
-    public function __construct(string $throttleKey, $maxAttempts = 3, $decayMinutes = 1)
+    public function __construct(string $throttleKey = null, $maxAttempts = null, $decayMinutes = null)
     {
-        $this->throttleKey = $throttleKey;
-        $this->maxAttempts = $maxAttempts;
-        $this->decayMinutes = $decayMinutes;
+        $this->throttleKey  = is_null($throttleKey)  ? config('ezthrottle.defaultThrottleKey') : $throttleKey;
+        $this->maxAttempts  = is_null($maxAttempts)  ? config('ezthrottle.defaultMaxAttempts') : $maxAttempts;
+        $this->decayMinutes = is_null($decayMinutes) ? config('ezthrottle.defaultDecayMinutes') : $decayMinutes;
     }
 
     public function setMaxAttempts(int $maxAttempts)

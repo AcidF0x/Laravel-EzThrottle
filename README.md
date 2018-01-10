@@ -10,11 +10,10 @@ Basic Usage
 -----------
 
 Start by creating an `Throttle` instance  
-
 ```php
 use AcidF0x\EzThrottle\Throttle;  
 
-$throttle = new Throttle($throttleKey, $maxAttempts //optional, $decayMinutes //optional);  
+$throttle = new Throttle($throttleKey //optionnal, $maxAttempts //optional, $decayMinutes //optional);  
 
 // increase hit count
 $throttle->hit()
@@ -25,7 +24,7 @@ if ($agent->isBlock()) {
     //do something..
 }
 ```
-or use the `EzThrottle` Trait if you want  
+or use the `EzThrottle` trait if you want  
 
 ```php
 use AcidF0x\EzThrottle\Foundation\EzThrottle;
@@ -36,7 +35,7 @@ class SomeController extends Controller
     
     $protected $ThrottleKey = 'LoginThrottle';
     $protected $maxAttempts = '3';
-    $protected $$decayMinutes = '1';
+    $protected $decayMinutes = '1';
     
     public function doLogin()
     {
@@ -56,13 +55,33 @@ class SomeController extends Controller
 Localization
 -----------
 
+```bash
+php artisan vendor:publish --provider=AcixF0x\Ezthrrotle\EzthrottleServiceProvider
+```
+
+```php
+# resources/lang/vendor/ezthrottle/en/error.php
+
+<?php
+
+return [
+        'sec'=> 'Too Many Requests. Please try again in :sec seconds',
+        'min'=> 'Too Many Requests. Please try again in :min minutes',
+        'hour'=> 'Too Many Requests. Please try again in :hour hours',
+        'days'=> 'Too Many Requests. Please try again in :day days',
+];
+```
+
 Config
 -----------
 
+```bash
+php artisan vendor:publish --provider=AcixF0x\Ezthrrotle\EzthrottleServiceProvider
+```
 
 ## Todos
 - [x] Add Unit Test
 - [ ] Add Source Comment 
-- [ ] Add Useage on Readme File (30%)
+- [ ] Add Useage on Readme File (50%)
 - [ ] Add Packge on packagist
 - [ ] Test on Variable Laravel Version (5.5 OK)
