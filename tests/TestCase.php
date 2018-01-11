@@ -71,7 +71,8 @@ class TestCase extends Orchestra\Testbench\TestCase
     {
         $throttle = new AcidF0x\EzThrottle\Throttle($this->throttleKey, 5, 1);
         $throttle->hit();
-        $this->assertFalse($throttle->getErrorMsg());
+        $this->assertNull($throttle->getErrorMsg());
+        
     }
 
     /** @test */

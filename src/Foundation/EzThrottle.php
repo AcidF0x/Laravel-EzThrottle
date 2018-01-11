@@ -23,42 +23,74 @@ trait EzThrottle
         return app(RateLimiter::class);
     }
 
+    /**
+     * Returns the block status.
+     *
+     * @return bool
+     */
     public function isBlock()
     {
         return $this->limiter()->tooManyAttempts($this->throttleKey(), $this->maxAttempts(), $this->decayMinutes());
     }
 
+    /**
+     * Delete the cache of throttle key
+     *
+     * @return void
+     */
     public function hit()
     {
         $this->limiter()->hit($this->throttleKey(), $this->decayMinutes());
     }
 
+    /**
+     * Delete the cache of throttle key
+     *
+     * @return void
+     */
     public function clear()
     {
         $this->limiter()->clear($this->throttleKey());
     }
 
+    /**
+     * Returns the scheduled unblock time.
+     *
+     * @return null|Carbon\Carbon
+     */
+    
     public function getUnblockTime()
     {
         if (!$this->isBlock()) {
-            return false;
+            return null;
         }
         return Carbon::now($this->timezone())->addSeconds(
             $this->limiter()->availableIn($this->throttleKey())
         );
     }
+
+    /**
+     * Returns the time remaining until unblocking.
+     *
+     * @return \DateInterval||null
+     */
     public function leftUnblockTime()
     {
         if (!$this->isBlock()) {
-            return false;
+            return null;
         }
         return date_diff(Carbon::now($this->timezone()), $this->getUnblockTime());
     }
 
+    /**
+     * When throttling return error msg
+     *
+     * @return null|string
+     */
     public function getErrorMsg()
     {
         if (!$this->isBlock()) {
-            return false;
+            return null;
         }
 
         $timeLeft = $this->leftUnblockTime();

@@ -27,7 +27,12 @@ $throttle->hit()
 if ($agent->isBlock()) {
     echo $throttle->getErrorMsg(); // "Too Many Requests. Please try again in 1 minutes"
 } else {
-    //do something..
+    // ...
+    
+    if ( ... ) {
+        $throttle->clear();   
+    }
+    
 }
 ```
 or use the `EzThrottle` trait if you want  
@@ -51,7 +56,12 @@ class SomeController extends Controller
         $this->hit()
         if ($this->isBlock()) {
             return $this->getErrorMsg(); // "Too Many Requests. Please try again in 1 minutes"
-        } 
+        } else {
+            // ...
+            if ( ... ) {
+                $this->clear();
+            }
+        }
         
         //......
     }
