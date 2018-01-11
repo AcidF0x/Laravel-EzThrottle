@@ -81,8 +81,17 @@ class TestCase extends Orchestra\Testbench\TestCase
         $throttle->hit();
         $throttle->hit();
         $error = $throttle->getErrorMsg();
-        var_dump($error);
         $this->assertNotEmpty($error);
+    }
+
+    /** @test */
+    function it_can_clear()
+    {
+        $throttle = new AcidF0x\EzThrottle\Throttle($this->throttleKey, 1, 1);
+        $throttle->hit();
+        $throttle->hit();
+        $throttle->clear();
+        $this->assertFalse($throttle->isBlock());
     }
 
 
