@@ -24,7 +24,7 @@ $throttle = new Throttle($throttleKey , $maxAttempts, $decayMinutes);
 // increase hit count
 $throttle->hit()
 
-if ($agent->isBlock()) {
+if ($throttle->isBlock()) {
     echo $throttle->getErrorMsg(); // "Too Many Requests. Please try again in 1 minutes"
 } else {
     // ...
@@ -92,7 +92,7 @@ return [
 Config
 -----------
 ```php
-# config/ezthrott.ephp
+# config/ezthrottle.php
 
 <?php
 return [
