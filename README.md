@@ -1,10 +1,13 @@
 # Laravel-EzThrottle
 A simple Laravel Throttle extension
 
-
 Installation
 ------------
-
+install using composer:
+ 
+```bash
+ composer require acidf0x/laravel-ez-throttle
+```
 
 Basic Usage
 -----------
@@ -13,7 +16,10 @@ Start by creating an `Throttle` instance
 ```php
 use AcidF0x\EzThrottle\Throttle;  
 
-$throttle = new Throttle($throttleKey //optionnal, $maxAttempts //optional, $decayMinutes //optional);  
+$throttle = new Throttle();
+// or
+$throttle = new Throttle($throttleKey , $maxAttempts, $decayMinutes);
+
 
 // increase hit count
 $throttle->hit()
@@ -52,13 +58,14 @@ class SomeController extends Controller
 }
 ```
 
-Localization
+Customize
 -----------
-
 ```bash
 php artisan vendor:publish --provider=AcixF0x\Ezthrrotle\EzthrottleServiceProvider
 ```
 
+Localization
+-----------
 ```php
 # resources/lang/vendor/ezthrottle/en/error.php
 
@@ -74,14 +81,13 @@ return [
 
 Config
 -----------
+```php
+# config/ezthrott.ephp
 
-```bash
-php artisan vendor:publish --provider=AcixF0x\Ezthrrotle\EzthrottleServiceProvider
+<?php
+return [
+    'defaultThrottleKey' => 'throttle',
+    'defaultDecayMinutes' => '1',
+    'defaultMaxAttempts' => '3'
+];
 ```
-
-## Todos
-- [x] Add Unit Test
-- [ ] Add Source Comment 
-- [ ] Add Useage on Readme File (50%)
-- [ ] Add Packge on packagist
-- [ ] Test on Variable Laravel Version (5.5 OK)
