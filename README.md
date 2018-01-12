@@ -79,8 +79,6 @@ Localization
 ```php
 # resources/lang/vendor/ezthrottle/en/error.php
 
-<?php
-
 return [
         'sec'=> 'Too Many Requests. Please try again in :sec seconds',
         'min'=> 'Too Many Requests. Please try again in :min minutes',
@@ -93,11 +91,16 @@ Config
 -----------
 ```php
 # config/ezthrottle.php
-
-<?php
 return [
-    'defaultThrottleKey' => 'throttle',
+    'defaultThrottleKey' => 'throttle', 
     'defaultDecayMinutes' => '1',
     'defaultMaxAttempts' => '3'
 ];
 ```
+
+Todos
+-----------
+
+- [ ] change Trait Method  
+- [ ] Test and support Variable Laravel Ver. (5.*)
+- [ ] Change Composer Dependency
